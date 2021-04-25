@@ -15,10 +15,8 @@ https://www.freecodecamp.org/news/create-a-discord-bot-with-python/
 2. deploy your project
 
 ```bash
-./scripts/deploy.sh $project
+./scripts/deploy.sh $project $token
 ```
-
-3. set bot token key(`TOKEN`) to compute instance environment variable.
 
 ## Option
 
