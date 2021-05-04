@@ -12,7 +12,25 @@
 
 https://www.freecodecamp.org/news/create-a-discord-bot-with-python/
 
-2. deploy your project
+2. create image registry
+
+```sh
+./scripts/create_registry.sh $project
+```
+
+3. create serviceaccount
+
+```sh
+./scripts/create_account.sh $project
+```
+
+4. build image
+
+```sh
+./scripts/build.sh $project
+```
+
+5. deploy your project
 
 ```bash
 ./scripts/deploy.sh $project $token
@@ -22,6 +40,3 @@ https://www.freecodecamp.org/news/create-a-discord-bot-with-python/
 
 [Scheduling compute instances with Cloud Scheduler](https://cloud.google.com/scheduler/docs/start-and-stop-compute-engine-instances-on-a-schedule)
 
-## TODO
-
-- [ ] save reminders to datastore
