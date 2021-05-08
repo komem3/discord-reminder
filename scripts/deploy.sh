@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 project=$1
 token=$2
 
@@ -10,4 +12,4 @@ gcloud compute instances create-with-container discord-reminder --zone=us-centra
        --service-account="discord-bot@${project}.iam.gserviceaccount.com" \
        --machine-type=e2-micro \
        --scopes cloud-platform \
-       --preemptible --project $project --quiet
+       --preemptible --quiet --project $project
