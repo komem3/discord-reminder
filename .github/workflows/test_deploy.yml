@@ -1,0 +1,29 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup gcloud environment
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          service_account_key: ${{ secrets.SERVICE_ACCTOUN_CREDENTIALS }}
+          export_default_credentials: true
+
+      - name: Build image 🍳
+        run: ./scripts/build.sh $PROJECT_ID
+
+      - name: Deploy GCE 🤖
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: ./scripts/deploy.sh $PROJECT_ID $DISCORD_TOKEN
