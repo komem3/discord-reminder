@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -ex
 
 project=$1
 token=$2

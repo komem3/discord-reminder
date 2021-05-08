@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -ex
 
 project=$1
 gcloud builds submit \
