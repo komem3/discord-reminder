@@ -63,7 +63,7 @@ async def on_message(message: discord.Message):
             await message.channel.send(
                 'syntax \n$every (day|weekday) HH:mm message')
             return
-        date, timing, msg = ss[1].lower(), ss[2], ss[3]
+        date, timing, msg = ss[1].lower(), ss[2], ' '.join(ss[3:])
         if date not in target_timing:
             await message.channel.send('allow timing are ' +
                                        ', '.join(target_timing))
