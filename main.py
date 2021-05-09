@@ -9,8 +9,6 @@ target_timing = [
     'day', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
     'saturday', 'weekday', 'weekend'
 ]
-weekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
-weekend = ['sunday', 'saturday']
 
 
 @client.event
@@ -82,29 +80,29 @@ async def on_message(message: discord.Message):
 
 if __name__ == '__main__':
 
-    now = datetime.now(reminder.jp)
+    now_time = reminder.now_time()
 
     rs = reminder.fetch_reminders('date', '=', 'day')
     for r in rs:
-        if r.time > now.strftime('%H:%M'):
+        if r.time > now_time:
             reminder.reminders[r.channel].append(r)
 
-    day_week = now.strftime('%A').lower()
+    day_week = reminder.now_week()
     rs = reminder.fetch_reminders('date', '=', day_week)
     for r in rs:
-        if r.time > now.strftime('%H:%M'):
+        if r.time > now_time:
             reminder.reminders[r.channel].append(r)
 
-    if day_week in weekday:
+    if day_week in reminder.weekday:
         rs = reminder.fetch_reminders('date', '=', 'weekday')
         for r in rs:
-            if r.time > now.strftime('%H:%M'):
+            if r.time > now_time:
                 reminder.reminders[r.channel].append(r)
 
-    if day_week in weekend:
+    if day_week in reminder.weekend:
         rs = reminder.fetch_reminders('date', '=', 'weekend')
         for r in rs:
-            if r.time > now.strftime('%H:%M'):
+            if r.time > now_time:
                 reminder.reminders[r.channel].append(r)
 
     client.loop.create_task(reminder.check_reminder(client))

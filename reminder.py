@@ -12,6 +12,8 @@ kind = 'Reminder'
 
 jp = pytz.timezone('Asia/Tokyo')
 
+weekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+weekend = ['sunday', 'saturday']
 
 class Reminder:
     def __init__(self,
@@ -45,7 +47,9 @@ async def check_reminder(client: discord.Client):
 
 def push_reminder(reminder: Reminder) -> None:
     save_datastore(reminder)
-    if reminder.time > now_time():
+    week = now_week()
+    if (reminder.date == 'date' or
+        reminder.date == week) and reminder.time > now_time():
         reminders[reminder.channel].append(reminder)
 
 
@@ -86,3 +90,6 @@ def fetch_reminders(prop: str, operator: str, value) -> List[Reminder]:
 
 def now_time() -> str:
     return datetime.now(jp).strftime('%H:%M')
+
+def now_week() -> str:
+    return datetime.now(jp).strftime('%A').lower()
