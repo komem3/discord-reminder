@@ -12,5 +12,4 @@ gcloud compute instances create-with-container discord-reminder --zone=us-centra
        --service-account="discord-bot@${project}.iam.gserviceaccount.com" \
        --machine-type=e2-micro \
        --scopes cloud-platform \
-       --no-address \
        --preemptible --quiet --project $project
